@@ -11,14 +11,15 @@ CREATE TABLE users (
 CREATE TABLE posts (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     image TEXT,
-    tags TEXT[],
     caption TEXT NOT NULL,
-    user_id TEXT NOT NULL references users(github_username) 
+    tags TEXT[],
+    user_id TEXT NOT NULL references users(github_username) ON DELETE CASCADE
 );
 
 CREATE TABLE comments (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     body TEXT NOT NULL,
-    post_id BIGINT NOT NULL references posts(id),
-    user_id TEXT NOT NULL references users(github_username)
+    post_id BIGINT NOT NULL references posts(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL references users(github_username) ON DELETE CASCADE
 )
+
