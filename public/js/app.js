@@ -17,10 +17,14 @@ fetch('/api/v1/auth/verify')
     .catch((err) => {
         console.error(err)
 
-        const loginButton = document.createElement('button')
-        loginButton.textContent = 'Login with GitHub'
-        loginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/login')
+        const githubLoginButton = document.createElement('button')
+        const googleLoginButton = document.createElement('button')
 
-        root.append(loginButton)
+        googleLoginButton.textContent = 'Login with Google'
+        githubLoginButton.textContent = 'Login with GitHub'
+        githubLoginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/login')
+        googleLoginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/google-login')
+
+        root.append(githubLoginButton, googleLoginButton)
     })
 
