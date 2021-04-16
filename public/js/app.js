@@ -6,13 +6,18 @@ fetch('/api/v1/auth/verify')
         throw new Error('Not Logged In')
     })
     .then(({ username, photoUrl }) => {
+        const logout = document.createElement('button')
         const name = document.createElement('h3')
         const image = document.createElement('img')
+
         image.style.width = '150px'
         image.style.borderRadius = '50%'
         image.src = photoUrl
         name.textContent = username;
-        root.append(image, name)
+
+        logout.textContent = 'Logout'
+        logout.addEventListener('click', () => window.location.href = '/api/v1/auth/logout')
+        root.append(image, name, logout)
     })
     .catch((err) => {
         console.error(err)
@@ -22,7 +27,7 @@ fetch('/api/v1/auth/verify')
 
         googleLoginButton.textContent = 'Login with Google'
         githubLoginButton.textContent = 'Login with GitHub'
-        githubLoginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/login')
+        githubLoginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/github-login')
         googleLoginButton.addEventListener('click', () => window.location.href = '/api/v1/auth/google-login')
 
         root.append(githubLoginButton, googleLoginButton)
